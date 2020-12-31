@@ -1,4 +1,5 @@
-from LinkedList import LinkedList
+# from LinkedList import LinkedList
+from DoublyLinkedList import LinkedList
 import time
 import random
 
