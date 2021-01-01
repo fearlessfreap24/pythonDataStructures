@@ -116,6 +116,26 @@ class LinkedList():
             return self.tail.data
 
 
+    def continuityCheck(self, n, end='head'):
+        if end.lower() == 'head':
+            temp = self.head
+            count = 1
+            while temp.next != None:
+                temp = temp.next
+                count += 1
+            return count == n
+        
+        if end.lower() == 'tail':
+            temp = self.tail
+            count = 1
+            while temp.prev != None:
+                temp = temp.prev
+                count += 1
+            return count == n
+
+        return False
+
+
 # boundary conditions
 # 1. empty list
 # 2. single element
@@ -154,4 +174,10 @@ if __name__ == "__main__":
     print(f"Is five in the list? {ll.contains('five')}")
     print(f"Is six in the list? {ll.contains('six')}")
 
+    dll = LinkedList()
+    for i in range(100):
+        dll.add(i)
+    
+    print(f"Continuity Check from head - {dll.continuityCheck(100)}")
+    print(f"Continuity Check from tail - {dll.continuityCheck(100, end='tail')}")
     

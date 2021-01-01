@@ -77,6 +77,17 @@ def testContains(n):
     print(f"contains \"{randNum}\" out {n} items: {endContains - startContains}")
     return hasRandNum
 
+
+def testContinuity(n):
+    
+    ll = LinkedList()
+    
+    for i in range(n):
+        ll.add(i)
+    
+    
+
+
 def main():
     addFirstRemLast = testAddFirstRemLast(10000)
     print(f"Testing addFirst removeLast - {addFirstRemLast}")
