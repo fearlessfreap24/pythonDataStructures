@@ -85,18 +85,22 @@ def testContinuity(n):
     for i in range(n):
         ll.add(i)
     
+    return {'head': ll.continuityCheck(n), 'tail': ll.continuityCheck(n, end='tail')}
     
 
 
 def main():
-    addFirstRemLast = testAddFirstRemLast(10000)
+    testSize = 10000
+    addFirstRemLast = testAddFirstRemLast(testSize)
     print(f"Testing addFirst removeLast - {addFirstRemLast}")
-    addLastRemFirst = testAddLastRemFirst(10000)
+    addLastRemFirst = testAddLastRemFirst(testSize)
     print(f"Testing addLast removeFirst - {addLastRemFirst}")
-    remove = testRemove(10000)
+    remove = testRemove(testSize)
     print(f"Testing Remove - {remove}")
-    contains = testContains(10000)
+    contains = testContains(testSize)
     print(f"Testing contains - {contains}")
+    continuityCheck = testContinuity(testSize)
+    print(f"Testing Continuity - from head: {continuityCheck['head']}, from tail: {continuityCheck['tail']}")
 
 
 if __name__ == "__main__":
