@@ -11,6 +11,7 @@ class LinkedList():
         self.head = None
         self.tail = None
         self.size = 0
+        self.index = 0
     
 
     def add(self, data):
@@ -114,6 +115,22 @@ class LinkedList():
             return self.tail.data
 
 
+    def __iter__(self):
+        return self
+
+
+    def __next__(self):
+        if self.index >= self.size:
+            self.index = 0
+            raise StopIteration
+        node = self.head
+        for i in range(self.index):
+            node = node.next 
+        self.index += 1
+        return node.data
+
+
+
 # boundary conditions
 # 1. empty list
 # 2. single element
@@ -124,32 +141,14 @@ class LinkedList():
 
 if __name__ == "__main__":
     ll = LinkedList()
-    print(f"peekHead = {ll.peekHead()}, peekTail = {ll.peekTail()}")
-    print(f"adding one{ll.add('one')}")
-    print(f"peekHead = {ll.peekHead()}, peekTail = {ll.peekTail()}")
-    print(f"adding two{ll.add('two')}")
-    print(f"peekHead = {ll.peekHead()}, peekTail = {ll.peekTail()}")
-    print(f"adding three{ll.add('three')}")
-    print(f"peekHead = {ll.peekHead()}, peekTail = {ll.peekTail()}")
-    print(f"adding four{ll.add('four')}")
-    print(f"peekHead = {ll.peekHead()}, peekTail = {ll.peekTail()}")
-    print(f"adding five to the rear{ll.addRear('five')}")
-    print(f"peekHead = {ll.peekHead()}, peekTail = {ll.peekTail()}")
-    print(f"current size - {getattr(ll,'size')}")
-    print(f"remove three - {ll.remove('three')}")
-    print(f"current size - {getattr(ll,'size')}")
-    print(f"peekHead = {ll.peekHead()}, peekTail = {ll.peekTail()}")
-    print(f"remove one - {ll.remove('one')}")
-    print(f"current size - {getattr(ll,'size')}")
-    print(f"peekHead = {ll.peekHead()}, peekTail = {ll.peekTail()}")
-    print(f"remove six - {ll.remove('six')}")
-    print(f"current size - {getattr(ll,'size')}")
-    print(f"peekHead = {ll.peekHead()}, peekTail = {ll.peekTail()}")
-    print(f"Is one in the list? {ll.contains('one')}")
-    print(f"Is two in the list? {ll.contains('two')}")
-    print(f"Is three in the list? {ll.contains('three')}")
-    print(f"Is four in the list? {ll.contains('four')}")
-    print(f"Is five in the list? {ll.contains('five')}")
-    print(f"Is six in the list? {ll.contains('six')}")
+    
+    for i in range(10):
+        ll.add({f'user': f'user{i}', 'password': f'password{i}'})
+
+    for num in ll:
+        print(num)
+        
+    for num in ll:
+        print(num)
 
     
