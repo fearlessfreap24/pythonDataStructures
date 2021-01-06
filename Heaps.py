@@ -19,9 +19,10 @@ class Heaps:
 
         def remove(self):
             data = self.dataArr[0]
-            self.dataArr[0] = self.dataArr.pop()
+            self.dataArr[0] = self.dataArr[self.lastPos - 1]
             self.lastPos -= 1
             self.trickleDown(0)
+            self.dataArr.pop()
             return data
 
 
@@ -45,14 +46,14 @@ class Heaps:
             left = 2*parent+1
             right = 2*parent+2
             
-            if left > len(self.dataArr) - 1 and right > len(self.dataArr) -1:
+            if left > self.lastPos - 1 and right > self.lastPos -1:
                 return
 
-            if left == (len(self.dataArr) - 1):
+            if left == (self.lastPos - 1):
                 if self.dataArr[parent] < self.dataArr[left]:
                     self.swap(parent, left)
                 return
-            if right == (len(self.dataArr) - 1):
+            if right == (self.lastPos - 1):
                 if self.dataArr[parent] < self.dataArr[right]:
                     self.swap(parent, right)
                 return
@@ -69,14 +70,14 @@ if __name__ == "__main__":
     import random
 
     maxheap = Heaps.MaxHeap()
-    for i in range(15):
+    for i in range(5):
         maxheap.add(random.randrange(10))
 
     print(maxheap.dataArr)
 
-    for i in range(15):
-        print(maxheap.remove())
     
+    for i in range(5):
+        print(maxheap.remove())
     print(maxheap.dataArr)
     
     
