@@ -65,19 +65,80 @@ class Heaps:
                 self.trickleDown(right)
 
 
+    class MinHeap:
+
+        def __init__(self):
+            self.dataArr = []
+            self.lastPos = len(self.dataArr)
+
+        
+        def add(self, data):
+            self.dataArr.append(data)
+            self.trickleUp(self.lastPos)
+            self.lastPos += 1
+
+
+        def remove(self):
+            data = self.dataArr[0]
+            self.dataArr[0] = self.dataArr[self.lastPos - 1]
+            self.lastPos -= 1
+            self.trickleDown(0)
+            self.dataArr.pop()
+            return data
+
+
+        def swap(self, fromLocation, toLocation):
+            temp = self.dataArr[fromLocation]
+            self.dataArr[fromLocation] = self.dataArr[toLocation]
+            self.dataArr[toLocation] = temp
+
+
+        def trickleUp(self, position):
+            if position == 0:
+                return
+            else:
+                parent = int(math.floor((position - 1)/2))
+                if self.dataArr[parent] > self.dataArr[position]:
+                    self.swap(position, parent)
+                    self.trickleUp(parent)
+
+
+        def trickleDown(self, parent):
+            left = 2*parent+1
+            right = 2*parent+2
+            
+            if left > self.lastPos - 1 and right < self.lastPos -1:
+                return
+
+            if left == (self.lastPos - 1):
+                if self.dataArr[parent] < self.dataArr[left]:
+                    self.swap(parent, left)
+                return
+            if right == (self.lastPos - 1):
+                if self.dataArr[parent] < self.dataArr[right]:
+                    self.swap(parent, right)
+                return
+            if self.dataArr[left] < self.dataArr[right] and self.dataArr[parent] > self.dataArr[left]:
+                self.swap(parent, left)
+                self.trickleDown(left)
+            elif self.dataArr[parent] < self.dataArr[right]:
+                self.swap(parent, right)
+                self.trickleDown(right)
+
+
 if __name__ == "__main__":
     
     import random
 
-    maxheap = Heaps.MaxHeap()
-    for i in range(5):
-        maxheap.add(random.randrange(10))
+    minheap = Heaps.MinHeap()
+    for i in range(100):
+        minheap.add(random.randrange(100))
 
-    print(maxheap.dataArr)
+    print(minheap.dataArr)
 
     
-    for i in range(5):
-        print(maxheap.remove())
-    print(maxheap.dataArr)
+    for i in range(100):
+        print(minheap.remove())
+    print(minheap.dataArr)
     
     
